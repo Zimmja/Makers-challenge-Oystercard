@@ -12,7 +12,7 @@ class Oystercard
   end
 
   def top_up(value)
-    fail "this top_up would exceed maximum balance" if value+balance > @max_balance
+    fail "this top_up would exceed maximum balance" if value+balance > @max_balance  # originally wrote as @balance > @max_balance - this didn't trigger the fail until it was over 91 and we had to have the original top up code first, then the fail, then return @balance. Refactored to what is seen and tests pass
     @balance += value
   end
 
