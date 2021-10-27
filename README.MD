@@ -1,10 +1,12 @@
-# Oystercard Challenge 
+# Oystercard Challenge :credit_card:
 
 Task from Week 2 on the Makers bootcamp. This task was completed daily during pair-programming sessions with a new partner daily.
 
 Day 1 partner --> [Ginny Thomas](https://github.com/ginnyamazed) - Challenges 1 to 7 completed. We paired using the driver-navigator technique to push-pull commits to our own machines as we took turns. I also felt that we took our time to carefully read, digest and discuss the requirements of each challenge extensively which made writing the tests and the code go smoothly.
 
 Day 2 partner --> [Andy Bird](https://github.com/Andybird88) - Challenges 8 to 11 completed. Andy and I paired together on Day 2 after our respective allocated pairing parters were unavailable due to having prior commitments. We paired using the driver-navigator technique to push-pull commits to our own machines as we took turns. We took the time to plan each challenge and clearly communicated our thoughts to one another before agreeing on how to proceed.
+
+Day 1 partner --> [Dylan James](https://github.com/DylanRJ) - Challenges 11 to 12 completed, challenge 13 in progress. We paired using the driver-navigator technique to push-pull commits to our own machines as we took turns. We took our time once again to make sure we digested the information set out in the user stories before starting to write the code. This planning helped us write succinct code.
 
 ## About the task
 
@@ -101,6 +103,21 @@ This week's challenge went back over the basics we covered last week in [Boris B
 - Expose `entry_station` instance variable using an attribute reader :white_check_mark:
 - Make the card forget the entry station on touch out by setting it to `nil` :white_check_mark:
 - When your tests are all green, refactor to remove the `in_journey` variable. Rewrite the `in_journey?` method to infer its status based on whether or not there is an entry station :white_check_mark:
+
+#### Challenge 12 - Adding Journey History
+**Learning Objectives covered**
+- Write up a plan for how you will interact with your code and manually test in IRB :white_check_mark:
+- Store the list of journeys as an instance variable and expose it with an attribute reader - you will need to refactor the touch_out method to accept an exit station :white_check_mark:
+- Use a hash to store one journey (set of an entry and exit stations) :white_check_mark:
+- Write a test that checks that the card has an empty list of journeys by default :white_check_mark:
+- Write a test that checks that touching in and out creates one journey :white_check_mark:
+- Keep all code including tests DRY :white_check_mark:
+
+#### Challenge 13 - Creating the Station Class
+**Learning Objectives covered**
+- Write up a plan for how you will interact with your code and manually test in IRB :white_check_mark:
+- Test drive the creation of a Station class that exposes a name and a zone variable :hourglass_flowing_sand: *in progress*
+- Use only one expectation per test :hourglass_flowing_sand: *in progress*
 
 ## Reminder of this week's goals from the [Week Outlines](https://github.com/makersacademy/course/blob/main/week_outlines.md)
 
