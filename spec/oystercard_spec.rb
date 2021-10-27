@@ -9,6 +9,9 @@ describe Oystercard do
     it "defaults to not in journey" do
       expect(subject.entry_station).to eq nil
     end
+    it 'has an empty journey list' do
+      expect(subject.journey_list).to eq []
+    end
   end
 
   describe '#top_up' do
@@ -39,6 +42,7 @@ describe Oystercard do
   describe '#touch_out' do
       it 'touches card out' do
         subject.top_up(Oystercard::MAX_BALANCE)
+        #failing test for reset private method
         subject.touch_in(entry_station)
         subject.touch_out(exit_station)
         expect(subject.entry_station).to eq nil
@@ -48,6 +52,15 @@ describe Oystercard do
         subject.top_up(Oystercard::MAX_BALANCE)
         expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-(subject.min_balance))
       end
+  end
+
+  describe '#journey_list' do
+    it 'adds completed journey to journey list' do
+      subject.top_up(Oystercard::MAX_BALANCE)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.journey_list.count).to eq 1
+    end
   end
 
   let(:entry_station){ double(:entry_station) }
