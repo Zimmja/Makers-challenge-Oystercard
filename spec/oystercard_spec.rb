@@ -1,10 +1,9 @@
 require 'oystercard'
-require 'station'
 
 describe Oystercard do
   describe '#initialize' do
     it 'has a default balance' do
-      expect(subject.balance).to eq Oystercard::DEFAULT_BALANCE  # we want oystercard.balance to equal the set default balance
+      expect(subject.balance).to eq Oystercard::DEFAULT_BALANCE
     end
     it "defaults to not in journey" do
       expect(subject.entry_station).to eq nil
@@ -40,18 +39,17 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
-      it 'touches card out' do
-        subject.top_up(Oystercard::MAX_BALANCE)
-        #failing test for reset private method
-        subject.touch_in(entry_station)
-        subject.touch_out(exit_station)
-        expect(subject.entry_station).to eq nil
-      end
+    it 'touches card out' do
+      subject.top_up(Oystercard::MAX_BALANCE)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.entry_station).to eq nil
+    end
       
-      it 'deducts journey fare when touching out' do
-        subject.top_up(Oystercard::MAX_BALANCE)
-        expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-(subject.min_balance))
-      end
+    it 'deducts journey fare when touching out' do
+      subject.top_up(Oystercard::MAX_BALANCE)
+      expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-(subject.min_balance))
+    end
   end
 
   describe '#journey_list' do
