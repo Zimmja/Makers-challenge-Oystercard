@@ -6,7 +6,7 @@ Day 1 partner --> [Ginny Thomas](https://github.com/ginnyamazed) - Challenges 1 
 
 Day 2 partner --> [Andy Bird](https://github.com/Andybird88) - Challenges 8 to 11 completed. Andy and I paired together on Day 2 after our respective allocated pairing parters were unavailable due to having prior commitments. We paired using the driver-navigator technique to push-pull commits to our own machines as we took turns. We took the time to plan each challenge and clearly communicated our thoughts to one another before agreeing on how to proceed.
 
-Day 1 partner --> [Dylan James](https://github.com/DylanRJ) - Challenges 11 to 12 completed, challenge 13 in progress. We paired using the driver-navigator technique to push-pull commits to our own machines as we took turns. We took our time once again to make sure we digested the information set out in the user stories before starting to write the code. This planning helped us write succinct code.
+Day 3 partner --> [Dylan James](https://github.com/DylanRJ) - Challenges 11 to 12 completed, challenge 13 in progress. We paired using the driver-navigator technique to push-pull commits to our own machines as we took turns. We took our time once again to make sure we digested the information set out in the user stories before starting to write the code. This planning helped us write succinct code.
 
 ## About the task
 

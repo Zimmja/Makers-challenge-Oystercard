@@ -21,17 +21,18 @@ class Oystercard
   end
 
   def touch_in(entry_station)
-    reset
+    forget_last_exit
     fail 'Error: insufficient funds' if @balance < @min_balance
     @entry_station = entry_station
-    "your current balance is £#{@balance}"
+    current_balance
   end
 
   def touch_out(exit_station)
     deduct(@min_balance)
     @exit_station = exit_station
-    @journey_list << { entry_station: @entry_station, exit_station: @exit_station }
-    "your current balance is £#{@balance}"
+    add_journey_hash
+    current_balance
+    forget_last_entrance
   end
 end
 
@@ -41,12 +42,23 @@ end
 
 private
 
-def reset
-  @entry_station = nil
-  @exit_station = nil
+def current_balance 
+  "your current balance is £#{@balance}"
 end
 
 def deduct(value)
   fail "this journey would take your balance below the minimum balance" if balance-value < @min_balance
   @balance -= value
+end
+
+def forget_last_exit
+  @exit_station = nil
+end
+
+def forget_last_entrance
+  @entry_station = nil
+end
+
+def add_journey_hash
+  @journey_list << { entry_station: @entry_station, exit_station: @exit_station }
 end
