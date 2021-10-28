@@ -2,14 +2,15 @@ require 'station'
 
 describe Station do
 
-#   describe '#initialize' do
-#     it 'Station has a name' do
-#       expect(subject.zone).to eq zone
-#     end
+  let(:station) { Station.new(name, zone) }
+  let(:name) { double(:name) }
+  let(:zone) { double(:zone) }
 
-#     it 'Station has a zone' do
-        
-#     end
-#   end
+  it 'has a station name by default' do
+    expect(station.name).to eq name
+  end
     
+  it 'has a station zone by default' do
+    expect(station.zone).to eq zone
+  end
 end
