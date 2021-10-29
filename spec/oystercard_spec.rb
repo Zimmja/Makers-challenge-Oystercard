@@ -29,7 +29,7 @@ describe Oystercard do
 
   describe '#touch_in' do
 
-      it 'touches card in (but better)' do
+      it 'touches card in' do
         subject.top_up(Oystercard::MAX_BALANCE)
         subject.touch_in(entry_station)
         expect(subject.current_journey).to_not eq nil
@@ -41,28 +41,16 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
-    # # this one --------------------------------------------------------------------------------------
-    # it 'touches card out' do
-    #   subject.top_up(Oystercard::MAX_BALANCE)
-    #   subject.touch_in(entry_station)
-    #   subject.touch_out(exit_station)
-    #   expect(subject.entry_station).to eq nil
-    # end
-      
+    it 'touches card out and adds journey to journey list' do
+      subject.top_up(Oystercard::MAX_BALANCE)
+      subject.touch_in(entry_station)
+      expect { subject.touch_out(exit_station) }.to change { subject.journey_list.count }.by(1)
+    end
+ 
     it 'deducts journey fare when touching out' do
       subject.top_up(Oystercard::MAX_BALANCE)
+      subject.touch_in(entry_station)
       expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-(subject.min_balance))
     end
   end
-
-  describe '#journey_list' do
-    # # this one --------------------------------------------------------------------------------------
-    # it 'adds completed journey to journey list' do
-    #   subject.top_up(Oystercard::MAX_BALANCE)
-    #   subject.touch_in(entry_station)
-    #   subject.touch_out(exit_station)
-    #   expect(subject.journey_list.count).to eq 1
-    # end
-  end
-
 end

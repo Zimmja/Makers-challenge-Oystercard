@@ -23,24 +23,17 @@ class Oystercard
   end
 
   def touch_in(entry_station)
-    #forget_last_exit
     touch_in_check
     @current_journey = Journey.new(entry_station)
-    #@entry_station = entry_station
     current_balance
   end
 
   def touch_out(exit_station)
-    deduct(@min_balance)
-    #@exit_station = exit_station
-    #add_journey_hash
+    @current_journey.finish(exit_station) 
+    deduct(@current_journey.fare)
+    add_journey
     current_balance
-    #forget_last_entrance
   end
-
-  # def in_journey?
-  #   !!entry_station
-  # end
 
   private
 
@@ -57,24 +50,15 @@ class Oystercard
   end
 
   def deduct(value)
-    deduct_check(value)
     @balance -= value
   end
 
-  def deduct_check(value)
-    fail "this journey would take your balance below the minimum balance" if @balance - value < @min_balance
+  def add_journey
+    @journey_list << @current_journey
+    reset_journey
   end
 
-  # def forget_last_exit
-  #   @exit_station = nil
-  # end
-
-  # def forget_last_entrance
-  #   @entry_station = nil
-  # end
-
-  # def add_journey_hash
-  #   @journey_list << { entry_station: @entry_station, exit_station: @exit_station }
-  # end
-
+  def reset_journey
+    @current_journey = nil
+  end
 end
