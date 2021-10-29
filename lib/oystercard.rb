@@ -23,12 +23,14 @@ class Oystercard
   end
 
   def touch_in(entry_station)
+    #check card was touched out last time
     touch_in_check
     @current_journey = Journey.new(entry_station)
     current_balance
   end
 
   def touch_out(exit_station)
+    #check card was touched in
     @current_journey.finish(exit_station) 
     deduct(@current_journey.fare)
     add_journey
