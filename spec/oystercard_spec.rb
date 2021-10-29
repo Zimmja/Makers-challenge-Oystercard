@@ -1,12 +1,13 @@
 require 'oystercard'
+require 'journey'
 
 describe Oystercard do
+  let(:entry_station){ double(:entry_station) }
+  let(:exit_station){ double(:exit_station) }
+
   describe '#initialize' do
     it 'has a default balance' do
       expect(subject.balance).to eq Oystercard::DEFAULT_BALANCE
-    end
-    it "defaults to not in journey" do
-      expect(subject.entry_station).to eq nil
     end
     it 'has an empty journey list' do
       expect(subject.journey_list).to eq []
@@ -27,6 +28,7 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
+    # this one --------------------------------------------------------------------------------------
       it 'touches card in' do
         subject.top_up(Oystercard::MAX_BALANCE)
         subject.touch_in(entry_station)
@@ -39,6 +41,7 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
+    # this one --------------------------------------------------------------------------------------
     it 'touches card out' do
       subject.top_up(Oystercard::MAX_BALANCE)
       subject.touch_in(entry_station)
@@ -53,6 +56,7 @@ describe Oystercard do
   end
 
   describe '#journey_list' do
+    # this one --------------------------------------------------------------------------------------
     it 'adds completed journey to journey list' do
       subject.top_up(Oystercard::MAX_BALANCE)
       subject.touch_in(entry_station)
@@ -61,17 +65,4 @@ describe Oystercard do
     end
   end
 
-  let(:entry_station){ double(:entry_station) }
-  it 'saves entry station' do
-    subject.top_up(Oystercard::MAX_BALANCE)
-    subject.touch_in(entry_station)
-    expect(subject.entry_station).to eq entry_station
-  end
-  let(:exit_station){ double(:exit_station) }
-    it 'saves entry station' do
-      subject.top_up(Oystercard::MAX_BALANCE)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.exit_station).to eq exit_station
-  end
 end
