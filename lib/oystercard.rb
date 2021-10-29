@@ -23,21 +23,33 @@ class Oystercard
   end
 
   def touch_in(entry_station)
-    #check card was touched out last time
+    apply_fine_if_active_journey
     touch_in_check
     @current_journey = Journey.new(entry_station)
     current_balance
   end
 
   def touch_out(exit_station)
-    #check card was touched in
-    @current_journey.finish(exit_station) 
+    @current_journey = Journey.new if @current_journey == nil
+    finish_journey(exit_station) 
+    close_down_journey
+  end
+
+  private
+
+  def apply_fine_if_active_journey
+    close_down_journey if @current_journey != nil
+  end
+
+  def finish_journey(station)
+    @current_journey.finish(station) 
+  end
+
+  def close_down_journey
     deduct(@current_journey.fare)
     add_journey
     current_balance
   end
-
-  private
 
   def top_up_check(value)
     fail "this top_up would exceed maximum balance" if value + @balance > @max_balance
@@ -49,6 +61,20 @@ class Oystercard
 
   def current_balance 
     "your current balance is £#{@balance}"
+  end
+
+  def apply_fine_if_active_journey
+    close_down_journey if @current_journey != nil
+  end
+
+  def finish_journey(station)
+    @current_journey.finish(station) 
+  end
+
+  def close_down_journey
+    deduct(@current_journey.fare)
+    add_journey
+    current_balance
   end
 
   def deduct(value)
@@ -63,4 +89,5 @@ class Oystercard
   def reset_journey
     @current_journey = nil
   end
+
 end

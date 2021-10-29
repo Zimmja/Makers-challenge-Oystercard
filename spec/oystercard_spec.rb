@@ -28,7 +28,6 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-
       it 'touches card in' do
         subject.top_up(Oystercard::MAX_BALANCE)
         subject.touch_in(entry_station)
@@ -37,6 +36,12 @@ describe Oystercard do
 
       it 'raises an error when balance is below minimum balance' do
         expect { subject.touch_in(entry_station) }.to raise_error 'Error: insufficient funds'
+      end
+
+      it 'deducts the penalty fare from @balance if @current_journey is not nil' do
+        subject.top_up(Oystercard::MAX_BALANCE)
+        subject.touch_in(entry_station)
+        expect { subject.touch_in(entry_station) }.to change { subject.balance }.by(-6)
       end
   end
 
@@ -51,6 +56,11 @@ describe Oystercard do
       subject.top_up(Oystercard::MAX_BALANCE)
       subject.touch_in(entry_station)
       expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-(subject.min_balance))
+    end
+
+    it 'deducts the penalty fare from @balance if @current_journey IS nil' do
+      subject.top_up(Oystercard::MAX_BALANCE)
+      expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-6)
     end
   end
 end
