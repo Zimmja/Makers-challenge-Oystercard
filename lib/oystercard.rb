@@ -1,6 +1,9 @@
+require_relative 'journey'
+require_relative 'station'
+
 class Oystercard
 
-  attr_reader :balance, :max_balance, :min_balance, :journey_list
+  attr_reader :balance, :max_balance, :min_balance, :journey_list, :current_journey
 
   DEFAULT_BALANCE = 0
   MAX_BALANCE = 90
@@ -11,6 +14,7 @@ class Oystercard
     @max_balance = max_balance
     @min_balance = min_balance
     @journey_list = []
+    @current_journey = nil
   end
 
   def top_up(value)
@@ -21,6 +25,7 @@ class Oystercard
   def touch_in(entry_station)
     #forget_last_exit
     touch_in_check
+    @current_journey = Journey.new(entry_station)
     #@entry_station = entry_station
     current_balance
   end
