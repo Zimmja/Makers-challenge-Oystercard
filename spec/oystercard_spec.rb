@@ -9,9 +9,6 @@ describe Oystercard do
     it 'has a default balance' do
       expect(subject.balance).to eq Oystercard::DEFAULT_BALANCE
     end
-    it 'has an empty journey list' do
-      expect(subject.journey_list).to eq []
-    end
   end
 
   describe '#top_up' do
@@ -28,11 +25,6 @@ describe Oystercard do
   end
 
   describe '#touch_in' do
-      it 'touches card in' do
-        subject.top_up(Oystercard::MAX_BALANCE)
-        subject.touch_in(entry_station)
-        expect(subject.current_journey).to_not eq nil
-      end
 
       it 'raises an error when balance is below minimum balance' do
         expect { subject.touch_in(entry_station) }.to raise_error 'Error: insufficient funds'
@@ -46,11 +38,6 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
-    it 'touches card out and adds journey to journey list' do
-      subject.top_up(Oystercard::MAX_BALANCE)
-      subject.touch_in(entry_station)
-      expect { subject.touch_out(exit_station) }.to change { subject.journey_list.count }.by(1)
-    end
  
     it 'deducts journey fare when touching out' do
       subject.top_up(Oystercard::MAX_BALANCE)
